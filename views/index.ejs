@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+<html  ng-app="shop">
+
+  <head>
+    <link rel="stylesheet" type="text/css" href="vendor/normalize.css"/>
+    <link rel="stylesheet" type="text/css" href="vendor/foundation.css"/>
+    <link rel="stylesheet" type="text/css" href="stylesheets/index.css"/>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.10/angular.min.js"></script>
+    <title>Shop</title>
+  </head>
+
+  <body ng-controller="mainCtrl">
+
+  <header class="top-bar large-12" data-topbar role="navigation">
+
+    <ul class="title-area large-2 medium-2">
+      <li class='name'>
+        <a id='name' href='/'>Shopfront</a>
+      </li>
+      <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+    </ul>
+
+    <section class="top-bar-section">
+      <ul class='right'>
+        <li class="has-dropdown" id='women-block'>
+          <a id='women-button'>Women</a>
+          <ul class="dropdown">
+            <li id='casualwear'>
+              <a>Casualwear</a>
+            </li>
+            <li>
+              <a>Formalwear</a>
+            </li>
+            <li>
+              <a>Footwear</a>
+            </li>
+          </ul>
+        </li>
+        <li class="has-dropdown" id='men-block'>
+          <a id='men-button'>Men</a>
+          <ul class="dropdown">
+            <li>
+              <a>Casualwear</a>
+            </li>
+            <li>
+              <a>Formalwear</a>
+            </li>
+            <li>
+              <a>Footwear</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a>Basket</a>
+        </li>
+      </ul>
+    </section>
+  </header>
+
+  <script src="vendor/modernizr.js"></script>
+  <script src="vendor/jquery.js"></script>
+  <script src="vendor/foundation.min.js"></script>
+  <script src="vendor/foundation.topbar.js"></script>
+  <script src="vendor/foundation.dropdown.js"></script>
+  <script src="js/app.js"></script>
+  <script src="vendor/foundation.js"></script>
+
+  </body>
+</html>

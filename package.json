@@ -1,0 +1,40 @@
+{
+  "name": "Shop-front",
+  "version": "1.0.0",
+  "description": "Shop-front",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mishal1/shop-front.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mishal1/shop-front/issues"
+  },
+  "homepage": "https://github.com/mishal1/shop-front",
+  "devDependencies": {
+    "chai": "^2.1.1",
+    "grunt": "^0.4.5",
+    "grunt-contrib-jshint": "^0.10.0",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-express-server": "^0.4.19",
+    "grunt-jasmine-node": "^0.2.1",
+    "grunt-mocha": "^0.4.11",
+    "grunt-mocha-test": "^0.12.7",
+    "grunt-protractor-runner": "^1.2.1",
+    "jasmine-node": "^1.14.5",
+    "jshint": "^2.5.11",
+    "mocha": "^2.2.1",
+    "phantomjs": "^1.9.13",
+    "webdriverio": "^2.4.5"
+  },
+  "dependencies": {
+    "body-parser": "^1.10.0",
+    "ejs": "^1.0.0",
+    "express": "^4.10.6"
+  }
+}
