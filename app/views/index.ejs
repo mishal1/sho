@@ -6,6 +6,7 @@
     <link rel="stylesheet" type="text/css" href="vendor/foundation.css"/>
     <link rel="stylesheet" type="text/css" href="stylesheets/index.css"/>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.10/angular.min.js"></script>
+
     <title>Shop</title>
   </head>
 
@@ -25,13 +26,13 @@
         <li class="has-dropdown" id='women-block'>
           <a id='women-button'>Women</a>
           <ul class="dropdown">
-            <li id='casualwear'>
+            <li id='casualwear' ng-click="show('Womens Casualwear')">
               <a>Casualwear</a>
             </li>
-            <li>
+            <li ng-click="show('Womens Formalwear')">
               <a>Formalwear</a>
             </li>
-            <li>
+            <li ng-click="show('Womens Footwear')">
               <a>Footwear</a>
             </li>
           </ul>
@@ -39,23 +40,35 @@
         <li class="has-dropdown" id='men-block'>
           <a id='men-button'>Men</a>
           <ul class="dropdown">
-            <li>
+            <li id='casualwear' ng-click="show('Mens Casualwear')">
               <a>Casualwear</a>
             </li>
-            <li>
+            <li ng-click="show('Mens Formalwear')">
               <a>Formalwear</a>
             </li>
-            <li>
+            <li ng-click="show('Mens Footwear')">
               <a>Footwear</a>
             </li>
           </ul>
         </li>
-        <li>
+        <li ng-click='showBasket()'>
           <a>Basket</a>
         </li>
       </ul>
     </section>
   </header>
+
+  <main id='items'>
+    <item id="product" ng-repeat="product in list" ng-cloak>
+      <item id="product-image">
+        <img ng-src="{{product.url}}"/>
+        <item id='product-info'>
+          <article>£{{product.price}}</article>
+          <button ng-click='addToBasket(product)'>Add To Basket</button>
+        </item>
+      </item>
+    </item>
+  </main>
 
   <script src="vendor/modernizr.js"></script>
   <script src="vendor/jquery.js"></script>

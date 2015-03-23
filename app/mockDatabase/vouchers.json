@@ -1,0 +1,17 @@
+{
+  "under50": {
+    "discount": 5.00,
+    "totalPriceRequirement": 0.00,
+    "itemRequirement": ""
+    },
+ "over50": {
+  "discount": 10.00,
+    "totalPriceRequirement": 50.00,
+    "itemRequirement": ""
+  },
+ "over75withshoes": {
+  "discount": 15.00,
+    "totalPriceRequirement": 75.00,
+    "itemRequirement": "footwear"
+} 
+}

@@ -4,8 +4,8 @@ var server = require('http').createServer(app);
 var bodyParser = require('body-parser');
 
 app.set('view engine', 'ejs')
-app.set('views', __dirname + '/views');
-app.use(express.static(__dirname + '/public'));
+app.set('views', __dirname + '/app/views');
+app.use(express.static(__dirname + '/app'));
 app.use(bodyParser.urlencoded({'extended':'true'}));
 
 app.get('/', function(request, response){
