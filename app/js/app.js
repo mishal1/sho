@@ -1,8 +1,11 @@
 var app = angular.module('shop', []);
 
 app.controller('mainCtrl', function($scope, $http){
+
+  $scope.show('')
+
   $scope.show = function(item){
-    $http.get('mockDatabase/products.json')
+    $http.get('app/mockDatabase/products.json')
       .success(function(product){
         $scope.basket = []
         $scope.list = [];
@@ -19,4 +22,19 @@ app.controller('mainCtrl', function($scope, $http){
       });
   };
 
+  $scope.addToBasket = function(product){
+    var item = {product: product};
+    $http({
+      method:'POST',
+      url:'http://localhost:3000/addProduct',
+      data: $.param(item),
+      transformRequest: false,
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+    })
+    .error(function(error){
+      console.log(error)
+    });
+  };
+
+  };
 });

@@ -5,7 +5,7 @@
     "price": 99.00,
     "quantity": 5,
     "name": "Almond Toe Court Shoes",
-    "url": "images/women-shoes1.jpeg"
+    "url": "app/images/women-shoes1.jpeg"
   },
   "Suede Shoes": {
     "category": "Womens Footwear",
@@ -13,7 +13,7 @@
     "price": 42.00,
     "quantity": 4,
     "name": "Suede Shoes",
-    "url": "images/women-shoes2.png"
+    "url": "app/images/women-shoes2.png"
   },
   "Leather Driver Saddle Loafers": {
     "category": "Mens Footwear",
@@ -21,7 +21,7 @@
     "price": 34.00,
     "quantity": 12,
     "name": "Leather Driver Saddle Loafers",
-    "url": "images/mens-shoes1.png"
+    "url": "app/images/mens-shoes1.png"
   },
   "Red Flip flops": {
     "category": "Mens Footwear",
@@ -29,7 +29,7 @@
     "price": 19.00,
     "quantity": 6,
     "name": "Red Flip flops",
-    "url": "images/mens-shoes2.png"
+    "url": "app/images/mens-shoes2.png"
   },
   "Blue Flip flops": {
     "category": "Mens Footwear",
@@ -37,7 +37,7 @@
     "price": 19.00,
     "quantity": 0,
     "name": "Blue Flip flops",
-    "url": "images/mens-shoes3.png"
+    "url": "app/images/mens-shoes3.png"
   },
   "Gold Button Cardigan": {
     "category": "Womens Casualwear",
@@ -45,7 +45,7 @@
     "price": 167.00,
     "quantity": 6,
     "name": "Gold Button Cardigan",
-    "url": "images/womens-casual1.png"
+    "url": "app/images/womens-casual1.png"
   },
   "Cotton Shorts": {
     "category": "Womens Casualwear",
@@ -53,7 +53,7 @@
     "price": 30.00,
     "quantity": 5,
     "name": "Cotton Shorts",
-    "url": "images/womens-casual2.png"
+    "url": "app/images/womens-casual2.png"
   },
   "Grey Fine Stripe Short Sleeve Shirt": {
     "category": "Mens Casualwear",
@@ -61,7 +61,7 @@
     "price": 49.99,
     "quantity": 9,
     "name": "Grey Fine Stripe Short Sleeve Shirt",
-    "url": "images/mens-casual1.png"
+    "url": "app/images/mens-casual1.png"
   },
   "Green Fine Stripe Short Sleeve Shirt": {
     "category": "Mens Casualwear",
@@ -69,7 +69,7 @@
     "price": 39.99,
     "quantity": 3,
     "name": "Green Fine Stripe Short Sleeve Shirt",
-    "url": "images/mens-casual2.jpg"
+    "url": "app/images/mens-casual2.jpg"
   }, 
   "Sharkskin Waistcoat": {
     "category": "Mens Formalwear",
@@ -77,7 +77,7 @@
     "price": 75.00,
     "quantity": 2,
     "name": "Sharkskin Waistcoat",
-    "url": "images/mens-formal1.jpeg"
+    "url": "app/images/mens-formal1.jpeg"
   }, 
   "Lightweight Patch Pocket Blazer": {
     "category": "Mens Formalwear",
@@ -85,7 +85,7 @@
     "price": 175.00,
     "quantity": 1,
     "name": "Lightweight Patch Pocket Blazer",
-    "url": "images/mens-formal2.jpg"
+    "url": "app/images/mens-formal2.jpg"
   }, 
   "Bird Print Dress": {
     "category": "Womens Formalwear",
@@ -93,7 +93,7 @@
     "price": 270.00,
     "quantity": 10,
     "name": "Bird Print Dress",
-    "url": "images/womens-formal1.jpg"
+    "url": "app/images/womens-formal1.jpg"
   }, 
   "Mid Twist Cut-Out Dress": {
     "category": "Womens Formalwear",
@@ -101,6 +101,6 @@
     "price": 540.00,
     "quantity": 5,
     "name": "Mid Twist Cut-Out Dress",
-    "url": "images/womens-formal2.jpeg"
+    "url": "app/images/womens-formal2.jpeg"
   }
 }

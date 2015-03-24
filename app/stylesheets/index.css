@@ -18,6 +18,7 @@ body {
   display: block;
   height: 520px;
   width: 420px;
+  float: left;
 }
 
 #name {
