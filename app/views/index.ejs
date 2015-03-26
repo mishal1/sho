@@ -90,6 +90,16 @@
     <article ng-show='noProducts' class="ng-hide">No items :(</article>
   </section>
 
+  <a href="#" data-reveal-id="myModal" id='modal'></a>
+
+  <div id="myModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+  <h2 id="modalTitle" ng-cloak>
+    {{invalidVoucher}}
+    {{outOfStock}}
+  </h2>
+  <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+  </div>
+
   <script src="app/vendor/modernizr.js"></script>
   <script src="app/vendor/jquery.js"></script>
   <script src="app/vendor/foundation.min.js"></script>

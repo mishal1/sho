@@ -50,6 +50,8 @@ app.controller('mainCtrl', function($scope, $http){
       $scope.products[item.name].quantity -= 1;
     } else {
       $scope.outOfStock = 'Out of stock :(';
+      $scope.invalidVoucher = null;
+      document.getElementById('modal').click()
     };
   };
 
@@ -82,8 +84,9 @@ app.controller('mainCtrl', function($scope, $http){
       $scope.userVoucher = voucher;
       $scope.updatePrice();
     } else {
-      $scope.invalidVoucher = 'Invalid Voucher';
-      console.log('invalid')
+      $scope.invalidVoucher = 'Invalid Voucher :(';
+      $scope.outOfStock = null
+      document.getElementById('modal').click()
     }
   };
 

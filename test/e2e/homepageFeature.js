@@ -1,6 +1,6 @@
 describe('homepage', function() {
 
-  var protractor;
+  var modal;
 
   beforeEach(function() {
     browser.get('http://localhost:3000');
@@ -18,6 +18,18 @@ describe('homepage', function() {
   var deleteItem = function(){
     var deleteButton = element.all(by.id('delete')).first();
     deleteButton.click();
+  };
+
+  var addFirstItem = function(){
+    var button = element.all(by.id('productButton')).first();
+    button.click();
+  };
+
+  var waitForModal = function(){
+    modal = browser.findElement(by.id('myModal'));
+    browser.wait(function(){
+      return modal.isDisplayed();
+    }, 8000);
   };
 
   it('should have title', function() {
@@ -111,11 +123,8 @@ describe('homepage', function() {
         });
       });
 
-    // it('a message is displayed if the voucher is not valid', function(){});
-    
     });
 
-    
     it('a voucher can be added to the basket', function(){
       fillVoucher('over75withshoes');
       browser.findElement(by.id('totalPrice')).then(function(element){
@@ -131,10 +140,50 @@ describe('homepage', function() {
       });
     });
 
-    // it('an out of stock message is displayed if the item is out of stock', function(){});
+    it('a modal should not be displayed', function(){
+      browser.findElement(by.id('myModal')).then(function(modal){
+        expect(modal.isDisplayed()).toBe(false);
+      });
+    });
+
+    describe('when an invalid voucher is added', function(){
+
+      beforeEach(function(){
+        deleteItem();
+        fillVoucher('over75withshoes');
+        waitForModal();
+      });
+      
+      it('a modal is displayed', function(){
+        expect(modal.isDisplayed()).toBe(true);
+      });
+
+      it('a message is displayed in the modal', function(){
+        expect(modal.getText()).toEqual('Invalid Voucher :(\n×');
+      });
+
+    });
 
   });
 
+  describe('when an item is out of stock', function(){
+
+    beforeEach(function(){
+      for(var i=0; i < 6; i++){
+        addFirstItem();
+      }
+      waitForModal();
+    });
+
+    it('a modal is displayed', function(){
+      expect(modal.isDisplayed()).toBe(true);
+    });
+
+    it('an out of stock message is displayed in the modal', function(){
+      expect(modal.getText()).toEqual('Out of stock :(\n×');
+    });
+    
+  });
 
 });
 
