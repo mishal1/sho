@@ -45,4 +45,25 @@ describe('homepage', function() {
     });
   });
 
+  // it('should have an empty basket', function(){});
+
+  // it('item can be added to the basket', function(){});
+
+  // it('should display total', function(){});
+  
+  // it('item is no longer display when an item is removed from the basket', function(){});
+
+  // it('the total price is changed when an item is removed from the basket', function(){});
+
+  // it('an out of stock message is displayed if the item is out of stock', function(){});
+
+  // it('a voucher can be added to the basket', function(){});
+
+  // it('a message is displayed if the voucher is not valid', function(){});
+
+  // it('a voucher will be removed if is no longer valid', function(){});
+
 });
+
+
+
