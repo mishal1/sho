@@ -70,17 +70,23 @@
     </item>
   </article>
 
-<!--   <main ng-show='displayBasket' ng-repeat='item in basket' ng-cloak>
-    {{ item }}
-  </main> -->
-
-  <section id='basket' ng-show='displayBasket'>
-    <main id='basketItem' ng-repeat='item in basket' ng-cloak>
+  <section id='basket' ng-show='displayBasket' ng-cloak>
+    <main id='basketItem' ng-repeat='item in basket track by $index' ng-cloak>
       <img id='basketImage' ng-src="{{item.url}}"/>
       <text>{{ item.name }}</text>
       <text>£{{item.price}}</text>
-      <button ng-click='deleteFromBasket(item)'>Delete</button>
+      <button ng-click='removeFromBasket(item)' id='delete'>Delete</button>
     </main>
+    <article ng-show='totalPrice' class="ng-hide">
+      <section ng-show='userVoucher'>
+        -£{{userVoucher.discount}}
+      </section>
+      <section id='totalPrice'>
+        Total Price: £{{totalPrice}}
+      </section>
+      Enter voucher <input type='text' ng-model="voucherCode">
+      <button ng-click='addVoucher()' id='voucherSubmit'>Submit</button>
+    </article>
     <article ng-show='noProducts' class="ng-hide">No items :(</article>
   </section>
 

@@ -58,6 +58,7 @@ app.controller('mainCtrl', function($scope, $http){
     $scope.basket.splice(index, 1);
     $scope.updatePrice()
     $scope.products[item.name].quantity += 1;
+    $scope.showBasket()
   };
 
   $scope.updatePrice = function(){
@@ -78,10 +79,11 @@ app.controller('mainCtrl', function($scope, $http){
   $scope.addVoucher = function(){
     var voucher = $scope.vouchers[$scope.voucherCode]
     if(voucher && $scope.checkVoucherIsValid(voucher)){
-      $scope.userVoucher = voucher
-      $scope.totalPrice -= voucher.discount
+      $scope.userVoucher = voucher;
+      $scope.updatePrice();
     } else {
       $scope.invalidVoucher = 'Invalid Voucher';
+      console.log('invalid')
     }
   };
 
@@ -91,6 +93,8 @@ app.controller('mainCtrl', function($scope, $http){
       if(item.category.indexOf(voucher.itemRequirement) > -1)
         itemRequirement = true
     });
+    if(voucher.itemRequirement === null)
+      itemRequirement = true
     return voucher.totalPriceRequirement <= $scope.totalPrice && itemRequirement
   }
 
