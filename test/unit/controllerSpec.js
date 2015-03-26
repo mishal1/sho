@@ -1,14 +1,26 @@
-describe('Shopfront Controller', function() {
+describe('Basket', function() {
 
   beforeEach(module('shop'));
 
-  var scope, ctrl, item;
+  var scope, ctrl, product, anotherProduct, httpBackend, voucher;
 
-  beforeEach(inject(function($rootScope, $controller) {
+  beforeEach(inject(function(_$httpBackend_, $rootScope, $controller) {
     scope = $rootScope.$new();
     ctrl = $controller('mainCtrl', {
       $scope: scope
     });
+    product = {name: "Almond Toe Court Shoes", category: "Womens Footwear", price: 99.00, quantity: 1}
+    anotherProduct = {category: "Womens Casualwear",colour: "Medium Red", price: 30.00, quantity: 5, name: "Cotton Shorts"}
+    otherProduct = {category: "Womens Casualwear",colour: "Medium Red", price: 75.00, quantity: 5, name: "Cotton Shorts"}
+    httpBackend = _$httpBackend_;
+    httpBackend.expectGET('app/mockDatabase/products.json')
+      .respond({"Almond Toe Court Shoes": product,
+                "Cotton Shorts": anotherProduct,
+              });
+    voucher = {discount: 15.00, totalPriceRequirement: 75.00, itemRequirement: "Footwear"};
+    httpBackend.expectGET('app/mockDatabase/vouchers.json')
+      .respond({"over75withshoes": voucher});
+    httpBackend.flush();
   }));
 
   it('is a controller', function(){
@@ -29,8 +41,6 @@ describe('Shopfront Controller', function() {
   describe('when a product is added to the basket', function(){
 
     beforeEach(function(){
-      product = {name: "Almond Toe Court Shoes", category: "Womens Footwear", price: 99.00, quantity: 1}
-      scope.products = {"Almond Toe Court Shoes": product}
       scope.addToBasket(product)
     })
 
@@ -39,7 +49,7 @@ describe('Shopfront Controller', function() {
     });    
 
     it('the total price changes', function(){
-      expect(scope.totalPrice).toEqual(product.price)
+      expect(scope.totalPrice).toEqual(99)
     });
 
     it('the stock decreases', function(){
@@ -70,16 +80,55 @@ describe('Shopfront Controller', function() {
       });
 
     });
-  
 
-    // it('a voucher can be added to the total price', function(){});
+    describe('voucher', function(){
 
-    // it('a voucher must exist to be added to the total price', function(){});
+      beforeEach(function(){
+        scope.voucherCode = "over75withshoes"
+      })
 
-    // it('a voucher must meet the total price requirements to be added to the total price', function(){});
+      it('can be added', function(){
+        scope.addVoucher()
+        expect(scope.userVoucher).toEqual(voucher)
+        expect(scope.totalPrice).toEqual(84)
+      });
 
-    // it('a voucher must meet the item requirements to be added to the total price', function(){});        
+      it('must exist to be added to the total price', function(){
+        scope.voucherCode = "RANDOM"
+        scope.addVoucher()
+        expect(scope.invalidVoucher).toEqual('Invalid Voucher')
+      });
+
+      describe('requirements for vouchers', function(){
+
+        beforeEach(function(){
+          scope.removeFromBasket(product);
+        });
+
+        it('must meet the total price requirements to be added to the total price', function(){
+          scope.addToBasket(anotherProduct);
+          scope.addVoucher()
+          expect(scope.invalidVoucher).toEqual('Invalid Voucher')
+        });
+
+        it('must meet the item requirements to be added to the total price', function(){
+          scope.addToBasket(otherProduct);
+          scope.addVoucher()
+          expect(scope.invalidVoucher).toEqual('Invalid Voucher')
+        });
+      
+      });
+
+      it('needs to be removed from the basket if it is no longer valid', function(){
+        scope.addVoucher()
+        scope.removeFromBasket(product)
+        scope.addToBasket(otherProduct)
+        console.log(scope.basket)
+        expect(scope.totalPrice).toEqual(75)
+      });
+
+    });
+
   });  
-
 
 });

@@ -70,6 +70,23 @@
     </item>
   </article>
 
+  <main id='basket' ng-repeat='item in basket' ng-cloak>
+    {{ item }}
+    <button ng-click='deleteFromBasket(item)'>Delete</button>
+  </main>
+
+  <article ng-show='totalPrice' class="ng-hide">
+    <section ng-show='voucher'>
+      -£{{voucher}}
+    </section>
+    <section>
+      Total Price: £{{totalPrice}}
+    </section>
+    Enter voucher <input type='text' ng-model="voucherCode">
+    <button ng-click='addVoucher()'>Submit</button>
+  </article>
+  <article ng-show='noProducts' class="ng-hide">No items :(</article>
+
   <script src="app/vendor/modernizr.js"></script>
   <script src="app/vendor/jquery.js"></script>
   <script src="app/vendor/foundation.min.js"></script>

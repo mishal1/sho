@@ -2,7 +2,7 @@ var app = angular.module('shop', []);
 
 app.controller('mainCtrl', function($scope, $http){
 
-  $scope.showAll = function(){
+  $scope.setUpStock = function(){
     $http.get('app/mockDatabase/products.json')
     .success(function(products){
       $scope.products = products;
@@ -11,6 +11,16 @@ app.controller('mainCtrl', function($scope, $http){
     .error(function(error, status, headers, config){
       console.log(error);
     });
+  };
+
+  $scope.setUpVouchers = function(){
+    $http.get('app/mockDatabase/vouchers.json')
+    .success(function(vouchers){
+      $scope.vouchers = vouchers
+    })
+    .error(function(error, status, headers, config){
+      console.log(error);
+    }); 
   };
 
   $scope.show = function(item, all){
@@ -28,12 +38,13 @@ app.controller('mainCtrl', function($scope, $http){
 
   $scope.basket = [];
   $scope.totalPrice = 0;
-  $scope.showAll();
+  $scope.setUpStock();
+  $scope.setUpVouchers();
 
   $scope.addToBasket = function(item){
     if($scope.products[item.name].quantity > 0){
       $scope.basket.push(item);
-      $scope.totalPrice += item.price;
+      $scope.updatePrice()
       $scope.products[item.name].quantity -= 1;
     } else {
       $scope.outOfStock = 'Out of stock :(';
@@ -43,8 +54,42 @@ app.controller('mainCtrl', function($scope, $http){
   $scope.removeFromBasket = function(item){
     var index = $scope.basket.indexOf(item)
     $scope.basket.splice(index, 1);
-    $scope.totalPrice -= item.price;
+    $scope.updatePrice()
     $scope.products[item.name].quantity += 1;
   };
+
+  $scope.updatePrice = function(){
+    var total = 0;
+    $scope.basket.forEach(function(item){
+      total += item.price;
+    });
+    $scope.totalPrice = total;
+    if($scope.userVoucher){
+      if($scope.checkVoucherIsValid($scope.userVoucher)){
+        $scope.totalPrice -= $scope.userVoucher.discount;
+      } else {
+        $scope.userVoucher = null
+      }
+    }
+  }
+
+  $scope.addVoucher = function(){
+    var voucher = $scope.vouchers[$scope.voucherCode]
+    if(voucher && $scope.checkVoucherIsValid(voucher)){
+      $scope.userVoucher = voucher
+      $scope.totalPrice -= voucher.discount
+    } else {
+      $scope.invalidVoucher = 'Invalid Voucher';
+    }
+  };
+
+  $scope.checkVoucherIsValid = function(voucher){
+    var itemRequirement = false
+    $scope.basket.forEach(function(item){
+      if(item.category.indexOf(voucher.itemRequirement) > -1)
+        itemRequirement = true
+    });
+    return voucher.totalPriceRequirement <= $scope.totalPrice && itemRequirement
+  }
 
 });
