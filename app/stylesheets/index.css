@@ -34,3 +34,16 @@ body {
 .top-bar-section ul li > a {
   font-size: 15px;
 }
+
+#basketImage {
+  border: solid;
+  padding: 10px;
+  height: 10%;
+  width: 10%;
+  position: relative;
+  display: inline-block;
+}
+
+#basketItem {
+  padding: 20px;
+}

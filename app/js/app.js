@@ -24,6 +24,8 @@ app.controller('mainCtrl', function($scope, $http){
   };
 
   $scope.show = function(item, all){
+    $scope.displayItems = true
+    $scope.displayBasket = false
     var products = $scope.products;
     $scope.list = [];
     for(var key in products){
@@ -91,5 +93,15 @@ app.controller('mainCtrl', function($scope, $http){
     });
     return voucher.totalPriceRequirement <= $scope.totalPrice && itemRequirement
   }
+
+  $scope.showBasket = function(){
+    $scope.displayItems = false
+    $scope.displayBasket = true
+    if($scope.basket.length === 0){
+      $scope.noProducts = true
+    } else {
+      $scope.noProducts = false
+    }
+  };
 
 });

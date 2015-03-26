@@ -26,7 +26,7 @@
         <li class="has-dropdown" id='women-block'>
           <a id='women-button'>Women</a>
           <ul class="dropdown">
-            <li id='casualwear' ng-click="show('Womens Casualwear')">
+            <li id='womenCasualwear' ng-click="show('Womens Casualwear')">
               <a>Casualwear</a>
             </li>
             <li ng-click="show('Womens Formalwear')">
@@ -40,7 +40,7 @@
         <li class="has-dropdown" id='men-block'>
           <a id='men-button'>Men</a>
           <ul class="dropdown">
-            <li id='casualwear' ng-click="show('Mens Casualwear')">
+            <li id='menCasualwear' ng-click="show('Mens Casualwear')">
               <a>Casualwear</a>
             </li>
             <li ng-click="show('Mens Formalwear')">
@@ -51,24 +51,38 @@
             </li>
           </ul>
         </li>
-        <li ng-click='showBasket()'>
+        <li id='basketButton' ng-click='showBasket()'>
           <a>Basket</a>
         </li>
       </ul>
     </section>
   </header>
 
-  <article id='items'>
+  <article id='items' ng-show='displayItems'>
     <item id="product" ng-repeat="product in list" ng-cloak class="two columns">
       <item id="product-image">
         <img ng-src="{{product.url}}"/>
         <item id='product-info'>
           <article>£{{product.price}}</article>
-          <button ng-click='addToBasket(product)'>Add To Basket</button>
+          <button id='productButton' ng-click='addToBasket(product)'>Add To Basket</button>
         </item>
       </item>
     </item>
   </article>
+
+<!--   <main ng-show='displayBasket' ng-repeat='item in basket' ng-cloak>
+    {{ item }}
+  </main> -->
+
+  <section id='basket' ng-show='displayBasket'>
+    <main id='basketItem' ng-repeat='item in basket' ng-cloak>
+      <img id='basketImage' ng-src="{{item.url}}"/>
+      <text>{{ item.name }}</text>
+      <text>£{{item.price}}</text>
+      <button ng-click='deleteFromBasket(item)'>Delete</button>
+    </main>
+    <article ng-show='noProducts' class="ng-hide">No items :(</article>
+  </section>
 
   <script src="app/vendor/modernizr.js"></script>
   <script src="app/vendor/jquery.js"></script>
