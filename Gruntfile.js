@@ -8,16 +8,9 @@ grunt.initConfig({
     },
     all: [
     'Gruntfile.js', 
-    './lib/**/*.js',
-    './test/**/*.js',
-    './public/js/*.js'
+    './app/js/*.js',
+    './test/**/*.js'
     ]
-  },
-  jasmine_node: {
-    options: {
-      forceExit: true, 
-    }, 
-    all: ['test/unitTests/']
   },
   express: {
     options:{},
@@ -25,15 +18,6 @@ grunt.initConfig({
       options: {
         script: './server.js'
       }
-    }
-  },
-  mochaTest: {
-    test: {
-      options: {
-        reporter: 'nyan',
-        quiet: false
-      },
-    src: ['test/acceptanceTests/*.js']
     }
   },
   protractor: {
@@ -45,11 +29,6 @@ grunt.initConfig({
     e2e: {
       options: {
         keepAlive: false
-      }
-    },
-    continuous: {
-      options: {
-        keepAlive: true
       }
     }
   },
