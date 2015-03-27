@@ -39,19 +39,11 @@ grunt.initConfig({
   protractor: {
     options: {
       configFile: "test/protractor-conf.js",
-   
-      // Do you want the output to use fun colors?
       noColor: false,
-   
-      // Set to true if you would like to use the Protractor command line debugging tool
-      // debug: true,
-   
-      // Additional arguments that are passed to the webdriver command
       args: { }
     },
     e2e: {
       options: {
-        // Stops Grunt process if a test fails
         keepAlive: false
       }
     },
@@ -63,9 +55,9 @@ grunt.initConfig({
   },
   watch: {
     files: [ 
-    './lib/**/*.js',
     './test/**/*.js',
-    './views/*.ejs',
+    './app/views/*.ejs',
+    './app/js/*.js',
     './public/**/*.js'
     ], 
     tasks: ['express', 'protractor', 'jshint']

@@ -51,3 +51,11 @@ body {
 #modal {
   visibility: hidden;
 }
+
+#noItems {
+  font-size: 30px;
+  position: relative;
+  display: block;
+  text-align: center;
+  padding: 40px;
+}

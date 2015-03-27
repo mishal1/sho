@@ -6,7 +6,8 @@
     <link rel="stylesheet" type="text/css" href="app/vendor/foundation.css"/>
     <link rel="stylesheet" type="text/css" href="app/stylesheets/index.css"/>
     <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-local-storage/dist/angular-local-storage.min.js"></script>
+    <script src="bower_components/angular-route/angular-route.min.js"></script>
     <title>Shop</title>
   </head>
 
@@ -61,7 +62,7 @@
   <article id='items' ng-show='displayItems'>
     <item id="product" ng-repeat="product in list" ng-cloak class="two columns">
       <item id="product-image">
-        <img ng-src="{{product.url}}"/>
+        <img id='image' ng-src="{{product.url}}"/>
         <item id='product-info'>
           <article>£{{product.price}}</article>
           <button id='productButton' ng-click='addToBasket(product)'>Add To Basket</button>
@@ -72,10 +73,10 @@
 
   <section id='basket' ng-show='displayBasket' ng-cloak>
     <main id='basketItem' ng-repeat='item in basket track by $index' ng-cloak>
+      <button ng-click='removeFromBasket(item)' id='delete'>Delete</button>
       <img id='basketImage' ng-src="{{item.url}}"/>
       <text>{{ item.name }}</text>
       <text>£{{item.price}}</text>
-      <button ng-click='removeFromBasket(item)' id='delete'>Delete</button>
     </main>
     <article ng-show='totalPrice' class="ng-hide">
       <section ng-show='userVoucher'>
@@ -87,7 +88,7 @@
       Enter voucher <input type='text' ng-model="voucherCode">
       <button ng-click='addVoucher()' id='voucherSubmit'>Submit</button>
     </article>
-    <article ng-show='noProducts' class="ng-hide">No items :(</article>
+    <article ng-show='noProducts' class="ng-hide" id='noItems'>No items :(</article>
   </section>
 
   <a href="#" data-reveal-id="myModal" id='modal'></a>
@@ -106,6 +107,7 @@
   <script src="app/vendor/foundation.topbar.js"></script>
   <script src="app/vendor/foundation.dropdown.js"></script>
   <script src="app/js/app.js"></script>
+  <script src="app/js/controller.js"></script>
   <script src="app/vendor/foundation.js"></script>
 
   </body>

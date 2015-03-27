@@ -96,7 +96,7 @@ describe('Basket', function() {
       it('must exist to be added to the total price', function(){
         scope.voucherCode = "RANDOM";
         scope.addVoucher();
-        expect(scope.invalidVoucher).toEqual('Invalid Voucher');
+        expect(scope.invalidVoucher).toEqual('Invalid Voucher :(');
       });
 
       describe('requirements for vouchers', function(){
@@ -108,13 +108,13 @@ describe('Basket', function() {
         it('must meet the total price requirements to be added to the total price', function(){
           scope.addToBasket(anotherProduct);
           scope.addVoucher();
-          expect(scope.invalidVoucher).toEqual('Invalid Voucher');
+          expect(scope.invalidVoucher).toEqual('Invalid Voucher :(');
         });
 
         it('must meet the item requirements to be added to the total price', function(){
           scope.addToBasket(otherProduct);
           scope.addVoucher();
-          expect(scope.invalidVoucher).toEqual('Invalid Voucher');
+          expect(scope.invalidVoucher).toEqual('Invalid Voucher :(');
         });
       
       });
