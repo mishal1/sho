@@ -1,63 +1,25 @@
-describe('voucher', function(){
+var Helper = require('./helper');
 
-  var modal;
+describe('voucher', function(){
 
   beforeEach(function() {
     browser.get('http://localhost:3000');
     browser.waitForAngular();
-    addFirstItem();
-    addLastItem();
-    visitBasket();
+    Helper.addFirstItem.call();
+    Helper.addLastItem.call();
+    Helper.visitBasket.call();
   });
 
   afterEach(function(){
-    deleteAllItems();
+    Helper.deleteAllItems.call();
   });
-
-  var fillVoucher = function(voucherCode){
-    browser.findElement(by.css('input')).then(function(input){
-      input.sendKeys(voucherCode);  
-      var button = browser.findElement(by.id('voucherSubmit'));
-      button.click();
-    });
-  };
-
-  var deleteItem = function(){
-    var deleteButton = element.all(by.id('delete')).first();
-    deleteButton.click();
-  };
-
-  var addFirstItem = function(){
-    var button = element.all(by.id('productButton')).first();
-    button.click();
-  };
-
-  var waitForModal = function(){
-    modal = browser.findElement(by.id('myModal'));
-    browser.wait(function(){
-      return modal.isDisplayed();
-    }, 8000);
-  };
-
-  // ADD TO HELPER!!
-
-  var addLastItem = function(){
-    button = element.all(by.id('productButton')).last();
-    button.click();
-  };
-
-  var visitBasket = function(){
-    var basketButton = browser.findElement(by.id('basketButton')).then(function(button){
-      button.click();
-    });
-  };
 
   var deleteAllItems = function(){
     element.all(by.id('basketItem')).then(function(items){
       for(var i = 0; i< items.length; i++){
         browser.get('http://localhost:3000');
-        visitBasket();
-        deleteItem();
+        Helper.visitBasket.call();
+        Helper.deleteItem.call();
       }
     });    
   };
@@ -71,7 +33,7 @@ describe('voucher', function(){
   describe('when a voucher is added', function(){
 
     beforeEach(function(){
-      fillVoucher('over75withshoes');
+      Helper.fillVoucher.call();
     });
 
     it('the total price decreases', function(){
@@ -81,7 +43,7 @@ describe('voucher', function(){
     });
 
     it('the voucher will be removed if it is no longer valid', function(){
-      deleteItem();
+      Helper.deleteItem.call();
       browser.findElement(by.id('totalPrice')).then(function(element){
         expect(element.getText()).toEqual('Total Price: £540');
       });
@@ -96,14 +58,17 @@ describe('voucher', function(){
   });
 
   describe('when an invalid voucher is added', function(){
+  
+    var modal;
 
     beforeEach(function(){
-      deleteAllItems();
+      Helper.deleteAllItems.call();
       browser.get('http://localhost:3000');
-      addLastItem();
-      visitBasket();
-      fillVoucher('over75withshoes');
-      waitForModal();
+      Helper.addLastItem.call();
+      Helper.visitBasket.call();
+      Helper.fillVoucher.call();
+      Helper.waitForModal.call();
+      modal = modal = browser.findElement(by.id('myModal'));
     });
 
     it('a modal is displayed', function(){

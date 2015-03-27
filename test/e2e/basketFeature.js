@@ -1,3 +1,5 @@
+var Helper = require('./helper');
+
 describe('basket', function(){
 
   beforeEach(function() {
@@ -5,34 +7,8 @@ describe('basket', function(){
     browser.waitForAngular();
   });
 
-  var deleteItem = function(){
-    var deleteButton = element.all(by.id('delete')).first();
-    deleteButton.click();
-  };
-
-  var addFirstItem = function(){
-    var button = element.all(by.id('productButton')).first();
-    button.click();
-  };
-
-  var visitBasket = function(){
-    var basketButton = browser.findElement(by.id('basketButton')).then(function(button){
-      button.click();
-    });
-  };
-
-  var deleteAllItems = function(){
-    element.all(by.id('basketItem')).then(function(items){
-      for(var i = 0; i< items.length; i++){
-        browser.get('http://localhost:3000');
-        visitBasket();
-        deleteItem();
-      }
-    });    
-  };
-
   it('should be empty', function(){
-    visitBasket();
+    Helper.visitBasket.call();
     browser.findElement(by.id('basket')).then(function(element){
         expect(element.getText()).toEqual('No items :(');
     });
@@ -41,12 +17,12 @@ describe('basket', function(){
   describe('adds item to basket', function(){
 
     beforeEach(function(){
-      addFirstItem();
-      visitBasket();      
+      Helper.addFirstItem.call();
+      Helper.visitBasket.call();      
     });
 
     afterEach(function(){
-      deleteAllItems();
+      Helper.deleteAllItems.call();
     });
 
     it('item can be added to the basket', function(){
@@ -65,7 +41,7 @@ describe('basket', function(){
     describe('when an item is removed from the basket', function(){
 
       beforeEach(function(){
-        deleteItem();
+        Helper.deleteItem.call();
       });
 
       it('the item should no longer be displayed', function(){

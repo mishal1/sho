@@ -1,6 +1,6 @@
-describe('products', function() {
+var Helper = require('./helper');
 
-  var modal;
+describe('products', function() {
 
   beforeEach(function() {
     browser.get('http://localhost:3000');
@@ -8,41 +8,8 @@ describe('products', function() {
   });
 
   afterEach(function(){
-    deleteAllItems();
+    Helper.deleteAllItems.call();
   });
-
-  var addFirstItem = function(){
-    var button = element.all(by.id('productButton')).first();
-    button.click();
-  };
-
-  var deleteAllItems = function(){
-    element.all(by.id('basketItem')).then(function(items){
-      for(var i = 0; i< items.length; i++){
-        browser.get('http://localhost:3000');
-        visitBasket();
-        deleteItem();
-      }
-    });    
-  };
-
-  var waitForModal = function(){
-    modal = browser.findElement(by.id('myModal'));
-    browser.wait(function(){
-      return modal.isDisplayed();
-    }, 8000);
-  };
-
-  var visitBasket = function(){
-    var basketButton = browser.findElement(by.id('basketButton')).then(function(button){
-      button.click();
-    });
-  };
-
-  var deleteItem = function(){
-    var deleteButton = element.all(by.id('delete')).first();
-    deleteButton.click();
-  };
 
   it('should have title', function() {
     expect(browser.getTitle()).toEqual('Shop');
@@ -90,11 +57,14 @@ describe('products', function() {
 
   describe('when an item is out of stock', function(){
 
+    var modal;
+
     beforeEach(function(){
       for(var i= 0; i < 6; i++){
-        addFirstItem();
+        Helper.addFirstItem.call();
       }
-      waitForModal();
+      Helper.waitForModal.call();
+      modal = modal = browser.findElement(by.id('myModal'));
     });
 
     it('a modal is displayed', function(){
