@@ -32,6 +32,11 @@ grunt.initConfig({
       }
     }
   },
+  karma: {
+    unit: {
+      configFile: 'test/karma.conf.js'
+    }
+  },
   watch: {
     files: [ 
     './test/**/*.js',
@@ -39,7 +44,7 @@ grunt.initConfig({
     './app/js/*.js',
     './public/**/*.js'
     ], 
-    tasks: ['express', 'protractor', 'jshint']
+    tasks: ['express', 'protractor', 'karma', 'jshint']
   }
 });
 
@@ -47,7 +52,8 @@ grunt.loadNpmTasks('grunt-express-server');
 grunt.loadNpmTasks('grunt-contrib-jshint');
 grunt.loadNpmTasks('grunt-contrib-watch');
 grunt.loadNpmTasks('grunt-protractor-runner');
+grunt.loadNpmTasks('grunt-karma');
 
-grunt.registerTask('test',['express','protractor']);
+grunt.registerTask('test',['express','protractor', 'karma']);
 
 };

@@ -33,9 +33,9 @@ describe('Basket', function() {
     expect(scope.basket).toEqual([]);
   });
 
-  it('has a total price of 0', function(){
+  it('has a total price of null when initialised', function(){
     expect(scope.totalPrice).toBeDefined();
-    expect(scope.totalPrice).toEqual(0);
+    expect(scope.totalPrice).toEqual(null);
   });
 
   describe('when a product is added to the basket', function(){
