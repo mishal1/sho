@@ -72,23 +72,30 @@
   </article>
 
   <section id='basket' ng-show='displayBasket' ng-cloak>
+
+
     <main id='basketItem' ng-repeat='item in basket track by $index' ng-cloak>
-      <button ng-click='removeFromBasket(item)' id='delete'>Delete</button>
+      <a ng-click='removeFromBasket(item)' id='delete'>X</a>
       <img id='basketImage' ng-src="{{item.url}}"/>
-      <text>{{ item.name }}</text>
+      <text>{{ item.name }}</text> <text id='break'>|</text>
       <text>£{{item.price}}</text>
     </main>
+
+
     <article ng-show='totalPrice' class="ng-hide">
-      <section ng-show='userVoucher'>
-        -£{{userVoucher.discount}}
+      <section ng-show='userVoucher' id='userVoucher'>
+        Voucher: -£{{userVoucher.discount}}  
       </section>
       <section id='totalPrice'>
         Total Price: £{{totalPrice}}
       </section>
-      Enter voucher <input type='text' ng-model="voucherCode">
-      <button ng-click='addVoucher()' id='voucherSubmit'>Submit</button>
+      <section id='voucher'>
+        <input type='text' ng-model="voucherCode" placeholder='Enter voucher'>
+        <button ng-click='addVoucher()' id='voucherSubmit'>Submit</button>
+      </section>
     </article>
     <article ng-show='noProducts' class="ng-hide" id='noItems'>No items :(</article>
+    <button ng-click="show('', 'all')" id='continueShopping'>Continue Shopping</button>
   </section>
 
   <a href="#" data-reveal-id="myModal" id='modal'></a>

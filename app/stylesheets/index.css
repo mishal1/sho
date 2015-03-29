@@ -59,3 +59,53 @@ body {
   text-align: center;
   padding: 40px;
 }
+
+input {
+  width: 50% !important;
+  position: relative !important;
+  display: inline !important;
+}
+
+#voucherSubmit {
+  padding-top: 8px;
+  padding-bottom: 10px;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+#continueShopping {
+  position: relative;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+#voucher {
+  display: block;
+  position: relative;
+  text-align: center;
+}
+
+#totalPrice {
+  display: block;
+  position: relative;
+  text-align: center;
+  padding-bottom: 5px;
+}
+
+#userVoucher {
+  position: relative;
+  display: block;
+  text-align: center;
+  padding-bottom: 5px;
+}
+
+#break {
+  color: #008CBA
+}
+
+#items {
+  position: relative;
+  display: block;
+  background-color: red;
+}
