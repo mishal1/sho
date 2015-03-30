@@ -10,7 +10,7 @@ describe('basket', function(){
   it('should be empty', function(){
     Helper.visitBasket.call();
     browser.findElement(by.id('basket')).then(function(element){
-        expect(element.getText()).toEqual('No items :(');
+        expect(element.getText()).toEqual('No items :(\nContinue Shopping');
     });
   });
 
@@ -50,9 +50,9 @@ describe('basket', function(){
         });
       });
 
-      it('the total price should update', function(){
+      it('the display message should change', function(){
         browser.findElement(by.id('basket')).then(function(element){
-          expect(element.getText()).toEqual('No items :(');
+          expect(element.getText()).toEqual('No items :(\nContinue Shopping');
         });
       });
 

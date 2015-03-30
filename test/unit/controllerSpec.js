@@ -1,8 +1,8 @@
 describe('Basket', function() {
 
-  beforeEach(module('shop'));
-
   var scope, ctrl, product, anotherProduct, httpBackend, voucher;
+
+  beforeEach(module('shop'));
 
   beforeEach(inject(function(_$httpBackend_, $rootScope, $controller) {
     scope = $rootScope.$new();

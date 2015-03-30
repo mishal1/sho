@@ -1,12 +1,12 @@
 angular.module('shop')
 
-.controller('mainCtrl', function($scope, $http, localStorageService){
+.controller('mainCtrl', function($scope, $http, localStorageService, Product){
 
   $scope.setUpStock = function(){
     $http.get('app/mockDatabase/products.json')
     .success(function(products){
       $scope.products = products;
-      $scope.show('', 'all');
+      $scope.show('');
     })
     .error(function(error, status, headers, config){
       console.log(error);
@@ -23,17 +23,10 @@ angular.module('shop')
     }); 
   };
 
-  $scope.show = function(item, all){
+  $scope.show = function(item){
     $scope.displayItems = true;
     $scope.displayBasket = false;
-    var products = $scope.products;
-    $scope.list = [];
-    for(var key in products){
-      if(products[key].category === item)
-        $scope.list.push(products[key]);
-      if(all)
-       $scope.list.push(products[key]);
-    }
+    $scope.list = Product.show($scope.products, item);
   };
 
   var basketStorage = localStorageService.get('basket');
@@ -45,7 +38,7 @@ angular.module('shop')
   }, true);
 
   $scope.$watch('userVoucher', function(){
-    localStorageService.set('voucher', $scope.userVoucher);
+    localStorageService.set('userVoucher', $scope.userVoucher);
   }, true);
 
   $scope.$watch('totalPrice', function(){
@@ -53,7 +46,7 @@ angular.module('shop')
   }, true);
 
   $scope.basket = basketStorage || [];
-  $scope.userVoucher = voucher;
+  $scope.userVoucher = voucher || null;
   $scope.totalPrice = 0;
   $scope.setUpStock();
   $scope.setUpVouchers();
@@ -64,6 +57,7 @@ angular.module('shop')
       $scope.basket.push(item);
       $scope.updatePrice();
       $scope.products[item.name].quantity -= 1;
+      $scope.itemAdded();
     } else {
       $scope.outOfStock = 'Out of stock :(';
       $scope.invalidVoucher = null;
@@ -130,6 +124,15 @@ angular.module('shop')
   $scope.showModal = function(){
     if(document.getElementById('modal'))
       document.getElementById('modal').click();
+  };
+
+  $scope.itemAdded = function(){
+    if(document.getElementById('itemAdded')){
+      document.getElementById('itemAdded').style.display = 'block';
+      setTimeout(function(){
+        document.getElementById('itemAdded').style.display = 'none';
+      }, 2000);
+    }
   };
 
 });

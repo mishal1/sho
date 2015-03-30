@@ -107,5 +107,11 @@ input {
 #items {
   position: relative;
   display: block;
-  background-color: red;
+}
+
+#itemAdded {
+  position: absolute;
+  color: white;
+  left: 40%;
+  display: none;
 }
