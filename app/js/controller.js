@@ -1,6 +1,6 @@
 angular.module('shop')
 
-.controller('mainCtrl', function($scope, $http, localStorageService, Product){
+.controller('mainCtrl', function($scope, $http, localStorageService, Product, Basket){
 
   $scope.setUpStock = function(){
     $http.get('app/mockDatabase/products.json')
@@ -54,9 +54,8 @@ angular.module('shop')
 
   $scope.addToBasket = function(item){
     if($scope.products[item.name].quantity > 0){
-      $scope.basket.push(item);
+      Basket.add(item, $scope.products, $scope.basket);
       $scope.updatePrice();
-      $scope.products[item.name].quantity -= 1;
       $scope.itemAdded();
     } else {
       $scope.outOfStock = 'Out of stock :(';
