@@ -1,4 +1,4 @@
-describe('Basket', function() {
+describe('Controller', function() {
 
   var scope, ctrl, product, anotherProduct, httpBackend, voucher;
 
@@ -31,11 +31,6 @@ describe('Basket', function() {
   it('has an empty basket', function() {
     expect(scope.basket).toBeDefined();
     expect(scope.basket).toEqual([]);
-  });
-
-  it('has a total price of null when initialised', function(){
-    expect(scope.totalPrice).toBeDefined();
-    expect(scope.totalPrice).toEqual(null);
   });
 
   describe('when a product is added to the basket', function(){

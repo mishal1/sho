@@ -1,137 +1,59 @@
 angular.module('shop')
 
-.controller('mainCtrl', function($scope, $http, localStorageService, Product, Basket){
+.controller('mainCtrl', function($scope, $http, localStorageService, Products, Basket, Voucher, Message, Storage){
 
   $scope.setUpStock = function(){
-    $http.get('app/mockDatabase/products.json')
-    .success(function(products){
-      $scope.products = products;
-      $scope.show('');
-    })
-    .error(function(error, status, headers, config){
-      console.log(error);
-    });
+    Products.get($scope); 
   };
 
   $scope.setUpVouchers = function(){
-    $http.get('app/mockDatabase/vouchers.json')
-    .success(function(vouchers){
-      $scope.vouchers = vouchers;
-    })
-    .error(function(error, status, headers, config){
-      console.log(error);
-    }); 
+    Voucher.get($scope);
   };
 
-  $scope.show = function(item){
-    $scope.displayItems = true;
-    $scope.displayBasket = false;
-    $scope.list = Product.show($scope.products, item);
-  };
-
-  var basketStorage = localStorageService.get('basket');
-  var voucher = localStorageService.get('userVoucher');
-  var totalPrice = localStorageService.get('totalPrice');
-
-  $scope.$watch('basket', function(){
-    localStorageService.set('basket', $scope.basket);
-  }, true);
-
-  $scope.$watch('userVoucher', function(){
-    localStorageService.set('userVoucher', $scope.userVoucher);
-  }, true);
-
-  $scope.$watch('totalPrice', function(){
-    localStorageService.set('totalPrice', $scope.totalPrice);
-  }, true);
-
-  $scope.basket = basketStorage || [];
-  $scope.userVoucher = voucher || null;
-  $scope.totalPrice = 0;
+  $scope.basket = localStorageService.get('basket') || [];
+  $scope.userVoucher = localStorageService.get('userVoucher');
   $scope.setUpStock();
   $scope.setUpVouchers();
-  $scope.totalPrice = totalPrice;
+  Storage.watchEverything($scope, localStorageService);
+
+  $scope.show = function(requirement){
+    $scope.list = Products.show(requirement, $scope);
+  };
 
   $scope.addToBasket = function(item){
-    if($scope.products[item.name].quantity > 0){
-      Basket.add(item, $scope.products, $scope.basket);
-      $scope.updatePrice();
-      $scope.itemAdded();
-    } else {
-      $scope.outOfStock = 'Out of stock :(';
-      $scope.invalidVoucher = null;
-      $scope.showModal();
-    }
+    Basket.add(item, $scope);
   };
 
   $scope.removeFromBasket = function(item){
-    var index = $scope.basket.indexOf(item);
-    $scope.basket.splice(index, 1);
-    $scope.updatePrice();
-    $scope.products[item.name].quantity += 1;
-    $scope.showBasket();
+    Basket.remove(item, $scope);
   };
 
   $scope.updatePrice = function(){
-    var total = 0;
-    $scope.basket.forEach(function(item){
-      total += item.price;
-    });
-    $scope.totalPrice = total;
-    if($scope.userVoucher){
-      if($scope.checkVoucherIsValid($scope.userVoucher)){
-        $scope.totalPrice -= $scope.userVoucher.discount;
-      } else {
-        $scope.userVoucher = null;
-      }
-    }
+    Basket.price($scope);
   };
 
   $scope.addVoucher = function(){
-    var voucher = $scope.vouchers[$scope.voucherCode];
-    if(voucher && $scope.checkVoucherIsValid(voucher)){
-      $scope.userVoucher = voucher;
-      $scope.updatePrice();
-    } else {
-      $scope.invalidVoucher = 'Invalid Voucher :(';
-      $scope.outOfStock = null;
-      $scope.showModal();
-    }
+    Voucher.add($scope);
   };
 
   $scope.checkVoucherIsValid = function(voucher){
-    var itemRequirement = false;
-    $scope.basket.forEach(function(item){
-      if(item.category.indexOf(voucher.itemRequirement) > -1)
-        itemRequirement = true;
-    });
-    if(voucher.itemRequirement === null)
-      itemRequirement = true;
-    return voucher.totalPriceRequirement <= $scope.totalPrice && itemRequirement;
+    return Voucher.checkValid($scope, voucher);
   };
 
   $scope.showBasket = function(){
-    $scope.displayItems = false;
-    $scope.displayBasket = true;
-    if($scope.basket.length === 0){
-      $scope.noProducts = true;
-    } else {
-      $scope.noProducts = false;
-    }
+    Basket.show($scope);
   };
 
-  $scope.showModal = function(){
-    if(document.getElementById('modal'))
-      document.getElementById('modal').click();
+  $scope.outOfStock = function(){
+    Message.outOfStock($scope);
+  };
+
+  $scope.invalidVoucher = function(){
+    Message.invalidVoucher($scope);
   };
 
   $scope.itemAdded = function(){
-    if(document.getElementById('itemAdded')){
-      document.getElementById('itemAdded').style.display = 'block';
-      setTimeout(function(){
-        document.getElementById('itemAdded').style.display = 'none';
-      }, 2000);
-    }
+    Message.itemAdded();
   };
 
 });

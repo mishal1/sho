@@ -1,18 +1,29 @@
-angular.module('shop').service('Product', function(){
+angular.module('shop').service('Products', function($http){
 
- var show = function(products, item){
-  var array = [];
-  for(var key in products){
-    if(products[key].category === item)
-      array.push(products[key]);
-    if(item === '')
-     array.push(products[key]);
-  }
-  return array;
- };
+  var show = function(requirement, $scope){
+    $scope.displayItems = true;
+    $scope.displayBasket = false;
+    var array = [];
+    for(var key in $scope.products){
+      if($scope.products[key].category === requirement)
+        array.push($scope.products[key]);
+      if(requirement === '')
+       array.push($scope.products[key]);
+    }
+    return array;
+  };
 
- return {
-  show: show
- };
+  var get = function($scope){
+    $http.get('app/mockDatabase/products.json')
+      .success(function(products){
+      $scope.products = products;
+      $scope.show('');
+    });
+  };
+
+  return {
+    show: show,
+    get: get
+  };
 
 });
