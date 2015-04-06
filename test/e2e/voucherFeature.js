@@ -1,84 +1,84 @@
-var Helper = require('./helper');
+// var Helper = require('./helper');
 
-describe('voucher', function(){
+// describe('voucher', function(){
 
-  beforeEach(function() {
-    browser.get('http://localhost:3000');
-    browser.waitForAngular();
-    Helper.addFirstItem.call();
-    Helper.addLastItem.call();
-    Helper.visitBasket.call();
-  });
+//   beforeEach(function() {
+//     browser.get('http://localhost:3000');
+//     browser.waitForAngular();
+//     Helper.addFirstItem.call();
+//     Helper.addLastItem.call();
+//     Helper.visitBasket.call();
+//   });
 
-  afterEach(function(){
-    Helper.deleteAllItems.call();
-  });
+//   afterEach(function(){
+//     Helper.deleteAllItems.call();
+//   });
 
-  var deleteAllItems = function(){
-    element.all(by.id('basketItem')).then(function(items){
-      for(var i = 0; i< items.length; i++){
-        browser.get('http://localhost:3000');
-        Helper.visitBasket.call();
-        Helper.deleteItem.call();
-      }
-    });    
-  };
+//   var deleteAllItems = function(){
+//     element.all(by.id('basketItem')).then(function(items){
+//       for(var i = 0; i< items.length; i++){
+//         browser.get('http://localhost:3000');
+//         Helper.visitBasket.call();
+//         Helper.deleteItem.call();
+//       }
+//     });    
+//   };
 
-  it('there should be no vouchers added automatically', function(){
-    browser.findElement(by.id('totalPrice')).then(function(element){
-      expect(element.getText()).toEqual('Total Price: £639');
-    });
-  });
+//   it('there should be no vouchers added automatically', function(){
+//     browser.findElement(by.id('totalPrice')).then(function(element){
+//       expect(element.getText()).toEqual('Total Price: £639');
+//     });
+//   });
 
-  describe('when a voucher is added', function(){
+//   describe('when a voucher is added', function(){
 
-    beforeEach(function(){
-      Helper.fillVoucher.call();
-    });
+//     beforeEach(function(){
+//       Helper.fillVoucher.call();
+//     });
 
-    it('the total price decreases', function(){
-      browser.findElement(by.id('totalPrice')).then(function(element){
-        expect(element.getText()).toEqual('Total Price: £624');
-      });
-    });
+//     it('the total price decreases', function(){
+//       browser.findElement(by.id('totalPrice')).then(function(element){
+//         expect(element.getText()).toEqual('Total Price: £624');
+//       });
+//     });
 
-    it('the voucher will be removed if it is no longer valid', function(){
-      Helper.deleteItem.call();
-      browser.findElement(by.id('totalPrice')).then(function(element){
-        expect(element.getText()).toEqual('Total Price: £540');
-      });
-    });
+//     it('the voucher will be removed if it is no longer valid', function(){
+//       Helper.deleteItem.call();
+//       browser.findElement(by.id('totalPrice')).then(function(element){
+//         expect(element.getText()).toEqual('Total Price: £540');
+//       });
+//     });
 
-    it('a modal should not be displayed', function(){
-      browser.findElement(by.id('myModal')).then(function(modal){
-        expect(modal.isDisplayed()).toBe(false);
-      });
-    });
+//     it('a modal should not be displayed', function(){
+//       browser.findElement(by.id('myModal')).then(function(modal){
+//         expect(modal.isDisplayed()).toBe(false);
+//       });
+//     });
 
-  });
+//   });
 
-  describe('when an invalid voucher is added', function(){
+//   describe('when an invalid voucher is added', function(){
   
-    var modal;
+//     var modal;
 
-    beforeEach(function(){
-      Helper.deleteAllItems.call();
-      browser.get('http://localhost:3000');
-      Helper.addLastItem.call();
-      Helper.visitBasket.call();
-      Helper.fillVoucher.call();
-      Helper.waitForModal.call();
-      modal = modal = browser.findElement(by.id('myModal'));
-    });
+//     beforeEach(function(){
+//       Helper.deleteAllItems.call();
+//       browser.get('http://localhost:3000');
+//       Helper.addLastItem.call();
+//       Helper.visitBasket.call();
+//       Helper.fillVoucher.call();
+//       Helper.waitForModal.call();
+//       modal = modal = browser.findElement(by.id('myModal'));
+//     });
 
-    it('a modal is displayed', function(){
-      expect(modal.isDisplayed()).toBe(true);
-    });
+//     it('a modal is displayed', function(){
+//       expect(modal.isDisplayed()).toBe(true);
+//     });
 
-    it('a message is displayed in the modal', function(){
-      expect(modal.getText()).toEqual('Invalid Voucher :(\n×');
-    });
+//     it('a message is displayed in the modal', function(){
+//       expect(modal.getText()).toEqual('Invalid Voucher :(\n×');
+//     });
 
-  });
+//   });
 
-});
+// });

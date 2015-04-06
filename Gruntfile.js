@@ -9,7 +9,8 @@ grunt.initConfig({
     all: [
     'Gruntfile.js', 
     './app/js/*.js',
-    './test/**/*.js'
+    './test/**/*.js',
+    './lib/*.js'
     ]
   },
   express: {
@@ -42,7 +43,8 @@ grunt.initConfig({
     './test/**/*.js',
     './app/views/*.ejs',
     './app/js/*.js',
-    './public/**/*.js'
+    './public/**/*.js',
+    './lib/*.js'
     ], 
     tasks: ['express', 'karma', 'protractor', 'jshint']
   }

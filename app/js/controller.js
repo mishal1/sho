@@ -20,40 +20,40 @@ angular.module('shop')
     $scope.list = Products.show(requirement, $scope);
   };
 
-  $scope.addToBasket = function(item){
-    Basket.add(item, $scope);
-  };
+  // $scope.addToBasket = function(item){
+  //   Basket.add(item, $scope);
+  // };
 
-  $scope.removeFromBasket = function(item){
-    Basket.remove(item, $scope);
-  };
+  // $scope.removeFromBasket = function(item){
+  //   Basket.remove(item, $scope);
+  // };
 
-  $scope.updatePrice = function(){
-    Basket.price($scope);
-  };
+  // $scope.updatePrice = function(){
+  //   Basket.price($scope);
+  // };
 
-  $scope.addVoucher = function(){
-    Voucher.add($scope);
-  };
+  // $scope.addVoucher = function(){
+  //   Voucher.add($scope);
+  // };
 
-  $scope.checkVoucherIsValid = function(voucher){
-    return Voucher.checkValid($scope, voucher);
-  };
+  // $scope.checkVoucherIsValid = function(voucher){
+  //   return Voucher.checkValid($scope, voucher);
+  // };
 
-  $scope.showBasket = function(){
-    Basket.show($scope);
-  };
+  // $scope.showBasket = function(){
+  //   Basket.show($scope);
+  // };
 
-  $scope.outOfStock = function(){
-    Message.outOfStock($scope);
-  };
+  // $scope.outOfStock = function(){
+  //   Message.outOfStock($scope);
+  // };
 
-  $scope.invalidVoucher = function(){
-    Message.invalidVoucher($scope);
-  };
+  // $scope.invalidVoucher = function(){
+  //   Message.invalidVoucher($scope);
+  // };
 
-  $scope.itemAdded = function(){
-    Message.itemAdded();
-  };
+  // $scope.itemAdded = function(){
+  //   Message.itemAdded();
+  // };
 
 });
