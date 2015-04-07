@@ -2,12 +2,12 @@ angular.module('shop')
 
 .controller('mainCtrl', function($scope, $http, localStorageService, Products, Basket, Voucher, Message, Display, Storage){
 
-  $scope.setUpStock = function(){
-    $scope.show('');
+  $scope.httpPost = function(item, url){
+    return $http({ method:'POST', url: url, data: $.param(item),headers: {'Content-Type': 'application/x-www-form-urlencoded'}});    
   };
 
   $scope.show = function(requirement){
-    Products.get()
+    $scope.httpPost('', '/getproducts')
     .success(function(products){
       $scope.products = products;
       $scope.list = Products.show(requirement, $scope);
@@ -16,12 +16,14 @@ angular.module('shop')
   };
 
   $scope.showBasket = function(){
+    if($scope.userVoucher)
+      $scope.checkVoucherValid({code: $scope.userVoucher.name});
     $scope.updatePrice();
     Display.basket($scope);
   };
 
   $scope.addToBasket = function(item){
-    Basket.checkInStock(item)
+    $scope.httpPost(item, '/checkstock')
     .success(function(successful){
       if(successful){
         Basket.add(item, $scope);
@@ -47,31 +49,25 @@ angular.module('shop')
     Basket.price($scope);
   };
 
+  $scope.checkVoucherValid = function(code){
+    $scope.httpPost(code, '/checkvoucherexists')
+    .success(function(voucher){
+      if(voucher && Voucher.checkValid($scope, voucher)){
+        Voucher.add($scope, voucher);
+      } else {
+        $scope.invalidVoucher();
+        $scope.showBasket();
+      }
+    });
+  };
+
+  $scope.invalidVoucher = function(){
+    Message.invalidVoucher($scope);
+  };
+
+  $scope.show('');
   $scope.basket = localStorageService.get('basket') || [];
-
-  $scope.setUpStock();
-
-  // $scope.setUpVouchers = function(){
-  //   Voucher.get($scope);
-  // };
-
-  // $scope.userVoucher = localStorageService.get('userVoucher');
-  // $scope.setUpVouchers();
-  // Storage.watchEverything($scope, localStorageService);
-
-
-
-
-  // $scope.addVoucher = function(){
-  //   Voucher.add($scope);
-  // };
-
-  // $scope.checkVoucherIsValid = function(voucher){
-  //   return Voucher.checkValid($scope, voucher);
-  // };
-
-  // $scope.invalidVoucher = function(){
-  //   Message.invalidVoucher($scope);
-  // };
+  $scope.userVoucher = localStorageService.get('userVoucher');
+  Storage.watchEverything($scope, localStorageService);
 
 });

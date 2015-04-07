@@ -1,7 +1,7 @@
 var helper = {
   fillVoucher: function(){
     browser.findElement(by.css('input')).then(function(input){
-      input.sendKeys('over75withshoes');  
+      input.sendKeys('over75WithShoes');  
       var button = browser.findElement(by.id('voucherSubmit'));
       button.click();
     });
@@ -23,13 +23,19 @@ var helper = {
       button.click();
     });
   },
-  waitForModal: function(){
+  waitForStockModal: function(){
+    modal = browser.findElement(by.id('stock'));
+    browser.wait(function(){
+      return modal.isDisplayed();
+    }, 8000);
+  },
+  waitForVoucherModal: function(){
     modal = browser.findElement(by.id('myModal'));
     browser.wait(function(){
       return modal.isDisplayed();
     }, 8000);
   },
-    deleteAllItems: function(){
+  deleteAllItems: function(){
     element.all(by.id('basketItem')).then(function(items){
       for(var i = 0; i< items.length; i++){
         browser.get('http://localhost:3000');

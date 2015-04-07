@@ -29,9 +29,17 @@ describe('Mock Database Methods', function(){
     expect(mockProductsJSON[0].quantity).toEqual(4);
   });
 
-  it('should increas the stock when an item is removed', function(){
+  it('should increase the stock when an item is removed', function(){
     mockDB.removeProduct("Suede Shoes");
     expect(mockProductsJSON[1].quantity).toEqual(1);
+  });
+
+  it('should return true if voucher exists', function(){
+    expect(mockDB.checkVoucherExists("under50")).toEqual({"name": "under50"});
+  });
+
+  it('should return false if a voucher does not exist', function(){
+    expect(mockDB.checkVoucherExists("random")).toEqual(null);
   });
 
 });

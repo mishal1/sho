@@ -8,6 +8,10 @@ angular.module('shop').service('Display', function($http){
   var basket = function($scope){
     $scope.displayItems = false;
     $scope.displayBasket = true;
+    checkIfBasketEmpty($scope);
+  };
+
+  var checkIfBasketEmpty = function($scope){
     if($scope.basket.length === 0){
       $scope.noProducts = true;
     } else {

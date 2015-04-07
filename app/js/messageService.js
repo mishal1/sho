@@ -5,6 +5,7 @@ angular.module('shop').service('Message', function($http){
   };
 
   var invalidVoucher = function($scope){
+    $scope.userVoucher = null;
     showModal('invalidVoucher');
   };
 
