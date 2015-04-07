@@ -100,14 +100,22 @@
     <button ng-click="show('', 'all')" id='continueShopping'>Continue Shopping</button>
   </section>
 
-  <a href="#" data-reveal-id="myModal" id='modal'></a>
+  <a href="#" data-reveal-id="stock" id='outOfStock'></a>
+
+  <div id="stock" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+    <h2 id="modalTitle" ng-cloak>
+      Out of stock! :(
+    </h2>
+    <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+  </div>
+
+  <a href="#" data-reveal-id="myModal" id='invalidVoucher'></a>
 
   <div id="myModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
-  <h2 id="modalTitle" ng-cloak>
-    {{invalidVoucher}}
-    {{outOfStock}}
-  </h2>
-  <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+    <h2 id="modalTitle" ng-cloak>
+      Invalid voucher! :(
+    </h2>
+    <a class="close-reveal-modal" aria-label="Close">&#215;</a>
   </div>
 
   <script src="app/vendor/modernizr.js"></script>
@@ -122,6 +130,7 @@
   <script src="app/js/voucherService.js"></script>
   <script src="app/js/messageService.js"></script>
   <script src="app/js/watchService.js"></script>
+  <script src="app/js/displayService.js"></script>
   <script src="app/vendor/foundation.js"></script>
 
   </body>

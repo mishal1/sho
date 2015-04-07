@@ -1,31 +1,22 @@
 angular.module('shop').service('Products', function($http){
 
   var show = function(requirement, $scope){
-    $scope.displayItems = true;
-    $scope.displayBasket = false;
     var array = [];
     $scope.products.forEach(function(item){
-      if(item.category === requirement)
-        array.push(item);
-      if(requirement === '')
-       array.push(item);      
+      checkItemCategory(array,item,requirement);
     });
-
-    // for(var key in $scope.products){
-    //   if($scope.products[key].category === requirement)
-    //     array.push($scope.products[key]);
-    //   if(requirement === '')
-    //    array.push($scope.products[key]);
-    // }
     return array;
   };
 
+  var checkItemCategory = function(array,item,requirement){
+    if(item.category === requirement)
+      array.push(item);
+    if(requirement === '')
+     array.push(item);
+  };
+
   var get = function($scope){
-    $http.post('/getproducts')
-      .success(function(products){
-      $scope.products = products;
-      $scope.show('');
-    });
+    return $http.post('/getproducts');
   };
 
   return {

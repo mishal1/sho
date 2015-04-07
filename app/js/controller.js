@@ -1,37 +1,66 @@
 angular.module('shop')
 
-.controller('mainCtrl', function($scope, $http, localStorageService, Products, Basket, Voucher, Message, Storage){
+.controller('mainCtrl', function($scope, $http, localStorageService, Products, Basket, Voucher, Message, Display, Storage){
 
   $scope.setUpStock = function(){
-    Products.get($scope); 
+    $scope.show('');
+  };
+
+  $scope.show = function(requirement){
+    Products.get()
+    .success(function(products){
+      $scope.products = products;
+      $scope.list = Products.show(requirement, $scope);
+      Display.items($scope);
+    });
+  };
+
+  $scope.showBasket = function(){
+    $scope.updatePrice();
+    Display.basket($scope);
+  };
+
+  $scope.addToBasket = function(item){
+    Basket.checkInStock(item)
+    .success(function(successful){
+      if(successful){
+        Basket.add(item, $scope);
+      } else {
+        $scope.outOfStock();
+      }
+    });
   };
   
+  $scope.outOfStock = function(){
+    Message.outOfStock($scope);
+  };
+
+  $scope.itemAdded = function(){
+    Message.itemAdded();
+  };
+  
+  $scope.removeFromBasket = function(item){
+    Basket.remove(item, $scope);
+  };
+
+  $scope.updatePrice = function(){
+    Basket.price($scope);
+  };
+
+  $scope.basket = localStorageService.get('basket') || [];
+
   $scope.setUpStock();
 
   // $scope.setUpVouchers = function(){
   //   Voucher.get($scope);
   // };
 
-  // $scope.basket = localStorageService.get('basket') || [];
   // $scope.userVoucher = localStorageService.get('userVoucher');
   // $scope.setUpVouchers();
   // Storage.watchEverything($scope, localStorageService);
 
-  $scope.show = function(requirement){
-    $scope.list = Products.show(requirement, $scope);
-  };
 
-  // $scope.addToBasket = function(item){
-  //   Basket.add(item, $scope);
-  // };
 
-  // $scope.removeFromBasket = function(item){
-  //   Basket.remove(item, $scope);
-  // };
-
-  // $scope.updatePrice = function(){
-  //   Basket.price($scope);
-  // };
 
   // $scope.addVoucher = function(){
   //   Voucher.add($scope);
@@ -41,20 +70,8 @@ angular.module('shop')
   //   return Voucher.checkValid($scope, voucher);
   // };
 
-  // $scope.showBasket = function(){
-  //   Basket.show($scope);
-  // };
-
-  // $scope.outOfStock = function(){
-  //   Message.outOfStock($scope);
-  // };
-
   // $scope.invalidVoucher = function(){
   //   Message.invalidVoucher($scope);
-  // };
-
-  // $scope.itemAdded = function(){
-  //   Message.itemAdded();
   // };
 
 });

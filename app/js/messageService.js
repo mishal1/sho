@@ -1,20 +1,16 @@
 angular.module('shop').service('Message', function($http){
 
   var outOfStock = function($scope){
-    $scope.outOfStock = 'Out of stock :(';
-    $scope.invalidVoucher = null;
-    showModal();    
+    showModal('outOfStock');  
   };
 
   var invalidVoucher = function($scope){
-    $scope.invalidVoucher = 'Invalid Voucher :(';
-    $scope.outOfStock = null;
-    showModal();
+    showModal('invalidVoucher');
   };
 
-  var showModal = function(){
-    if(document.getElementById('modal'))
-      document.getElementById('modal').click();
+  var showModal = function(modal){
+    if(document.getElementById(modal))
+      document.getElementById(modal).click();
   };
 
   var itemAdded = function(){
