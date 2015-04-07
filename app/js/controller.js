@@ -5,16 +5,17 @@ angular.module('shop')
   $scope.setUpStock = function(){
     Products.get($scope); 
   };
-
-  $scope.setUpVouchers = function(){
-    Voucher.get($scope);
-  };
-
-  $scope.basket = localStorageService.get('basket') || [];
-  $scope.userVoucher = localStorageService.get('userVoucher');
+  
   $scope.setUpStock();
-  $scope.setUpVouchers();
-  Storage.watchEverything($scope, localStorageService);
+
+  // $scope.setUpVouchers = function(){
+  //   Voucher.get($scope);
+  // };
+
+  // $scope.basket = localStorageService.get('basket') || [];
+  // $scope.userVoucher = localStorageService.get('userVoucher');
+  // $scope.setUpVouchers();
+  // Storage.watchEverything($scope, localStorageService);
 
   $scope.show = function(requirement){
     $scope.list = Products.show(requirement, $scope);

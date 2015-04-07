@@ -4,17 +4,24 @@ angular.module('shop').service('Products', function($http){
     $scope.displayItems = true;
     $scope.displayBasket = false;
     var array = [];
-    for(var key in $scope.products){
-      if($scope.products[key].category === requirement)
-        array.push($scope.products[key]);
+    $scope.products.forEach(function(item){
+      if(item.category === requirement)
+        array.push(item);
       if(requirement === '')
-       array.push($scope.products[key]);
-    }
+       array.push(item);      
+    });
+
+    // for(var key in $scope.products){
+    //   if($scope.products[key].category === requirement)
+    //     array.push($scope.products[key]);
+    //   if(requirement === '')
+    //    array.push($scope.products[key]);
+    // }
     return array;
   };
 
   var get = function($scope){
-    $http.get('app/mockDatabase/products.json')
+    $http.post('/getproducts')
       .success(function(products){
       $scope.products = products;
       $scope.show('');
