@@ -9,6 +9,7 @@ module.exports = function(config) {
       'bower_components/angular-mocks/angular-mocks.js',
       'bower_components/angular-local-storage/dist/angular-local-storage.min.js',
       'bower_components/angular-route/angular-route.min.js',
+      'node_modules/karma-jquery/jquery/*.js',
       'app/js/*.js',
       'test/unit/*.js',
       'lib/*.js'

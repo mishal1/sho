@@ -1,6 +1,6 @@
-angular.module('shop').service('Storage', function($http){
+angular.module('shop').service('Main', function($http){
 
-  var watchEverything = function($scope, localStorageService){
+  var watchBasket = function($scope, localStorageService){
     var array = ['basket', 'userVoucher'];
     array.forEach(function(element){
       $scope.$watch(element, function(){
@@ -9,8 +9,13 @@ angular.module('shop').service('Storage', function($http){
     });
   };
 
+  var httpPost = function(item, url){
+    return $http({ method:'POST', url: url, data: $.param(item),headers: {'Content-Type': 'application/x-www-form-urlencoded'}});    
+  };
+
   return {
-    watchEverything: watchEverything
+    watchBasket: watchBasket,
+    httpPost: httpPost
   };
 
 });

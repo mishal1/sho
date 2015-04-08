@@ -1,9 +1,9 @@
 angular.module('shop')
 
-.controller('mainCtrl', function($scope, $http, localStorageService, Products, Basket, Voucher, Message, Display, Storage){
+.controller('mainCtrl', function($scope, $http, localStorageService, Products, Basket, Voucher, Message, Display, Main){
 
   $scope.httpPost = function(item, url){
-    return $http({ method:'POST', url: url, data: $.param(item),headers: {'Content-Type': 'application/x-www-form-urlencoded'}});    
+    return Main.httpPost(item, url)      
   };
 
   $scope.show = function(requirement){
@@ -50,6 +50,6 @@ angular.module('shop')
   $scope.show('');
   $scope.basket = localStorageService.get('basket') || [];
   $scope.userVoucher = localStorageService.get('userVoucher');
-  Storage.watchEverything($scope, localStorageService);
+  Main.watchBasket($scope, localStorageService);
 
 });

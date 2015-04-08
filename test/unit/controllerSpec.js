@@ -6,41 +6,44 @@ describe('Controller', function() {
 
   beforeEach(inject(function(_$httpBackend_, $rootScope, $controller) {
     scope = $rootScope.$new();
+    httpBackend = _$httpBackend_;
     ctrl = $controller('mainCtrl', {
       $scope: scope
     });
-    product = {name: "Almond Toe Court Shoes", category: "Womens Footwear", price: 99.00, quantity: 1};
-    anotherProduct = {category: "Womens Casualwear",colour: "Medium Red", price: 30.00, quantity: 5, name: "Cotton Shorts"};
-    otherProduct = {category: "Womens Casualwear",colour: "Medium Red", price: 75.00, quantity: 5, name: "Cotton Shorts"};
-    httpBackend = _$httpBackend_;
-    httpBackend.expectGET('app/mockDatabase/products.json')
-      .respond({"Almond Toe Court Shoes": product,
-                "Cotton Shorts": anotherProduct,
-              });
-    voucher = {discount: 15.00, totalPriceRequirement: 75.00, itemRequirement: "Footwear"};
-    httpBackend.expectGET('app/mockDatabase/vouchers.json')
-      .respond({"over75withshoes": voucher});
-    httpBackend.flush();
+
+    // product = {name: "Almond Toe Court Shoes", category: "Womens Footwear", price: 99.00, quantity: 1};
+    // anotherProduct = {category: "Womens Casualwear",colour: "Medium Red", price: 30.00, quantity: 5, name: "Cotton Shorts"};
+    // otherProduct = {category: "Womens Casualwear",colour: "Medium Red", price: 75.00, quantity: 5, name: "Cotton Shorts"};
+    // httpBackend.whenPOST('/getproducts')
+    //   .respond([{a: 1}, {b: 2}])
+    // httpBackend.flush();
+    // httpBackend.expectGET('app/mockDatabase/products.json')
+    //   .respond({"Almond Toe Court Shoes": product,
+    //             "Cotton Shorts": anotherProduct,
+    //           });
+    // voucher = {discount: 15.00, totalPriceRequirement: 75.00, itemRequirement: "Footwear"};
+    // httpBackend.expectGET('app/mockDatabase/vouchers.json')
+    //   .respond({"over75withshoes": voucher});
   }));
 
-  it('is a controller', function(){
-    expect(ctrl).toBeDefined();
+  it('and scope is defined', function(){
+    // expect(ctrl).toBeDefined();
     expect(scope).toBeDefined();
   });
 
-  it('has an empty basket', function() {
-    expect(scope.basket).toBeDefined();
-    expect(scope.basket).toEqual([]);
-  });
+  // it('has an empty basket', function() {
+  //   expect(scope.basket).toBeDefined();
+  //   expect(scope.basket).toEqual([]);
+  // });
 
   // describe('when a product is added to the basket', function(){
 
-  //   beforeEach(function(){
-  //     scope.addToBasket(product);
-  //   });
+    // beforeEach(function(){
+    //   scope.addToBasket(product);
+    // });
 
     // it('the basket contains that product', function(){
-    //   expect(scope.basket).toEqual([product]);
+      // expect(scope.basket).toEqual([product]);
     // });    
 
     // it('the total price changes', function(){
