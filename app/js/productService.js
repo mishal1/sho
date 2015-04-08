@@ -26,10 +26,6 @@ angular.module('shop').service('Products', function($http){
     ifShowAllItems(array,item,requirement);
   };
 
-  var get = function($scope){
-    return $http.post('/getproducts');
-  };
-
   var ifFilterItems = function(array,item,requirement){
     if(item.category === requirement)
       array.push(item);
@@ -41,8 +37,7 @@ angular.module('shop').service('Products', function($http){
   };
 
   return {
-    show: show,
-    get: get
+    show: show
   };
 
 });

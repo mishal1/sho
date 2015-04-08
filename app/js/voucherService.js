@@ -1,3 +1,5 @@
+/*jshint expr:true */
+
 angular.module('shop').service('Voucher', function($http){
 
   var tryToApply = function(code, $scope){

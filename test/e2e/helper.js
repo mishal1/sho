@@ -24,13 +24,13 @@ var helper = {
     });
   },
   waitForStockModal: function(){
-    modal = browser.findElement(by.id('stock'));
+    var modal = browser.findElement(by.id('stock'));
     browser.wait(function(){
       return modal.isDisplayed();
     }, 8000);
   },
   waitForVoucherModal: function(){
-    modal = browser.findElement(by.id('myModal'));
+    var modal = browser.findElement(by.id('myModal'));
     browser.wait(function(){
       return modal.isDisplayed();
     }, 8000);

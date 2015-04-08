@@ -46,7 +46,7 @@ grunt.initConfig({
     './public/**/*.js',
     './lib/*.js'
     ], 
-    tasks: ['express', 'karma', 'jshint']
+    tasks: ['express', 'karma', 'protractor', 'jshint']
   }
 });
 

@@ -3,7 +3,7 @@ angular.module('shop')
 .controller('mainCtrl', function($scope, $http, localStorageService, Products, Basket, Voucher, Message, Display, Main){
 
   $scope.httpPost = function(item, url){
-    return Main.httpPost(item, url)      
+    return Main.httpPost(item, url);      
   };
 
   $scope.show = function(requirement){

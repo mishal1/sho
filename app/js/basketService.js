@@ -1,3 +1,5 @@
+/*jshint expr:true */
+
 angular.module('shop').service('Basket', function($http){
 
   var show = function($scope){
