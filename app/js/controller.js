@@ -7,30 +7,20 @@ angular.module('shop')
   };
 
   $scope.show = function(requirement){
-    $scope.httpPost('', '/getproducts')
-    .success(function(products){
-      $scope.products = products;
-      $scope.list = Products.show(requirement, $scope);
-      Display.items($scope);
-    });
+    Products.show($scope, requirement);
+  };
+
+  $scope.displayProducts = function(){
+    Display.items($scope);
   };
 
   $scope.showBasket = function(){
-    if($scope.userVoucher)
-      $scope.checkVoucherValid({code: $scope.userVoucher.name});
-    $scope.updatePrice();
+    Basket.show($scope);
     Display.basket($scope);
   };
 
   $scope.addToBasket = function(item){
-    $scope.httpPost(item, '/checkstock')
-    .success(function(successful){
-      if(successful){
-        Basket.add(item, $scope);
-      } else {
-        $scope.outOfStock();
-      }
-    });
+    Basket.checkInStock($scope, item);
   };
   
   $scope.outOfStock = function(){
@@ -50,15 +40,7 @@ angular.module('shop')
   };
 
   $scope.checkVoucherValid = function(code){
-    $scope.httpPost(code, '/checkvoucherexists')
-    .success(function(voucher){
-      if(voucher && Voucher.checkValid($scope, voucher)){
-        Voucher.add($scope, voucher);
-      } else {
-        $scope.invalidVoucher();
-        $scope.showBasket();
-      }
-    });
+    Voucher.tryToApply(code, $scope);
   };
 
   $scope.invalidVoucher = function(){

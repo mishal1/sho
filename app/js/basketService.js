@@ -1,5 +1,18 @@
 angular.module('shop').service('Basket', function($http){
 
+  var show = function($scope){
+    if($scope.userVoucher)
+      $scope.checkVoucherValid({code: $scope.userVoucher.name});
+    $scope.updatePrice();
+  };
+
+  var checkInStock = function($scope, item){
+    $scope.httpPost(item, '/checkstock')
+    .success(function(inStock){
+      inStock ? add(item, $scope) : $scope.outOfStock();
+    });
+  };
+
   var add = function(item, $scope){
     $scope.basket.push(item);
     $scope.updatePrice();
@@ -31,7 +44,8 @@ angular.module('shop').service('Basket', function($http){
   };
 
   return {
-    add: add,
+    show: show,
+    checkInStock: checkInStock,
     remove: remove,
     price: price
   };

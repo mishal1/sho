@@ -1,6 +1,19 @@
 angular.module('shop').service('Products', function($http){
 
-  var show = function(requirement, $scope){
+  var show = function($scope, requirement){
+    $scope.httpPost('', '/getproducts')
+    .success(function(products){
+      display($scope, requirement, products);
+    });    
+  };
+
+  var display = function($scope, requirement, products){
+      $scope.products = products;
+      $scope.list = list(requirement, $scope);
+      $scope.displayProducts();
+  };
+
+  var list = function(requirement, $scope){
     var array = [];
     $scope.products.forEach(function(item){
       checkItemCategory(array,item,requirement);

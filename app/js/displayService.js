@@ -1,13 +1,11 @@
 angular.module('shop').service('Display', function($http){
 
   var items = function($scope){
-    $scope.displayItems = true;
-    $scope.displayBasket = false;
+    showSections($scope, true, false);
   };
 
   var basket = function($scope){
-    $scope.displayItems = false;
-    $scope.displayBasket = true;
+    showSections($scope, false, true);
     checkIfBasketEmpty($scope);
   };
 
@@ -17,6 +15,11 @@ angular.module('shop').service('Display', function($http){
     } else {
       $scope.noProducts = false;
     }
+  };
+
+  var showSections = function($scope, items, basket){
+    $scope.displayItems = items;
+    $scope.displayBasket = basket;
   };
 
   return {

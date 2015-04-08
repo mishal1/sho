@@ -1,16 +1,28 @@
 angular.module('shop').service('Voucher', function($http){
 
+  var tryToApply = function(code, $scope){
+    $scope.httpPost(code, '/checkvoucherexists')
+    .success(function(voucher){
+      checkValid($scope, voucher) ? add($scope, voucher) : invalidVoucher($scope);
+    });
+  };
+
   var add = function($scope, voucher){
       $scope.userVoucher = voucher;
       $scope.updatePrice();
   };
 
+  var invalidVoucher = function($scope){
+    $scope.invalidVoucher();
+    $scope.showBasket();
+  };
+
   var checkValid = function($scope, voucher){
-    return  checkPriceRequirement($scope, voucher) && checkItemRequirement(false, $scope, voucher);
+    return  voucher && checkPriceRequirement($scope, voucher) && checkItemRequirement(false, $scope, voucher);
   };
 
   var checkPriceRequirement = function($scope, voucher){
-    return voucher.totalPriceRequirement <= $scope.totalPrice
+    return voucher.totalPriceRequirement <= $scope.totalPrice;
   };
 
   var checkItemRequirement = function(itemRequirement, $scope, voucher){
@@ -19,11 +31,11 @@ angular.module('shop').service('Voucher', function($http){
         itemRequirement = true;
     });
     return itemRequirement;
-  }
+  };
 
   return {
     add: add,
-    checkValid: checkValid
+    tryToApply: tryToApply
   };
 
 });
