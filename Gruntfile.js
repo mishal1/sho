@@ -57,5 +57,6 @@ grunt.loadNpmTasks('grunt-protractor-runner');
 grunt.loadNpmTasks('grunt-karma');
 
 grunt.registerTask('test',['express','protractor', 'karma']);
+grunt.registerTask('unitTest', ['express', 'karma']);
 
 };
