@@ -38,6 +38,20 @@ grunt.initConfig({
       configFile: 'test/karma.conf.js'
     }
   },
+  'start-selenium-server': {
+      dev: {
+        options: {
+          autostop: false,
+          downloadUrl: 'https://selenium-release.storage.googleapis.com/2.46/selenium-server-standalone-2.46.0.jar',
+          downloadLocation: os.tmpdir(),
+          serverOptions: {},
+          systemProperties: {}
+        }
+      }
+    },
+    'stop-selenium-server': {
+      dev: {}
+    },
   watch: {
     files: [ 
     './test/**/*.js',
@@ -55,9 +69,10 @@ grunt.loadNpmTasks('grunt-contrib-jshint');
 grunt.loadNpmTasks('grunt-contrib-watch');
 grunt.loadNpmTasks('grunt-protractor-runner');
 grunt.loadNpmTasks('grunt-karma');
+grunt.loadNpmTasks('grunt-selenium-server');
 
-grunt.registerTask('test',['express','protractor', 'karma']);
+grunt.registerTask('test',['express','start-selenium-server:dev','protractor', 'stop-selenium-server:dev', 'karma']);
 grunt.registerTask('unitTest', ['express', 'karma']);
-grunt.registerTask('featureTest', ['express', 'karma']);
+grunt.registerTask('featureTest', ['express', 'start-selenium-server:dev', 'protractor', 'stop-selenium-server:dev']);
 
 };
