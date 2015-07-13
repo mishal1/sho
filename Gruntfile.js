@@ -71,8 +71,8 @@ grunt.loadNpmTasks('grunt-protractor-runner');
 grunt.loadNpmTasks('grunt-karma');
 grunt.loadNpmTasks('grunt-selenium-server');
 
-grunt.registerTask('test',['express','start-selenium-server:dev','protractor', 'stop-selenium-server:dev', 'karma']);
+grunt.registerTask('test',['express','protractor', 'karma']);
 grunt.registerTask('unitTest', ['express', 'karma']);
-grunt.registerTask('featureTest', ['express', 'start-selenium-server:dev', 'protractor', 'stop-selenium-server:dev']);
+grunt.registerTask('featureTest', ['express', 'protractor']);
 
 };
