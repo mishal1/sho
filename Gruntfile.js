@@ -38,20 +38,6 @@ grunt.initConfig({
       configFile: 'test/karma.conf.js'
     }
   },
-  'start-selenium-server': {
-      dev: {
-        options: {
-          autostop: false,
-          downloadUrl: 'https://selenium-release.storage.googleapis.com/2.46/selenium-server-standalone-2.46.0.jar',
-          downloadLocation: os.tmpdir(),
-          serverOptions: {},
-          systemProperties: {}
-        }
-      }
-    },
-    'stop-selenium-server': {
-      dev: {}
-    },
   watch: {
     files: [ 
     './test/**/*.js',
